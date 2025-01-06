@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SapeArea
 {
@@ -13,30 +9,46 @@ namespace SapeArea
             string answer;
             float result;
 
-
-            Console.WriteLine("What shape wold you like to find the area of? Please enter 'r' rectangle or other key for circle.");
-
+            Console.WriteLine("What shape would you like to find the area of? Please enter 'r' for rectangle or any other key for circle.");
             answer = Console.ReadLine();
 
             if (answer == "r")
             {
                 Console.WriteLine("Please enter the height of the rectangle.");
-                float height = float.Parse(Console.ReadLine());
+                float height = GetValidNumber();
 
                 Console.WriteLine("Please enter the width of the rectangle.");
-                float width = float.Parse(Console.ReadLine());
+                float width = GetValidNumber();
 
                 result = height * width;
             }
             else
             {
                 Console.WriteLine("Please enter the radius of the circle.");
-                float radius = float.Parse(Console.ReadLine());
+                float radius = GetValidNumber();
 
                 result = (float)Math.PI * (radius * radius);
             }
-            Console.WriteLine("The result is a " + result);
+
+            Console.WriteLine("The result is " + result);
             Console.ReadKey();
+        }
+
+        // Метод для проверки корректного ввода числового значения
+        static float GetValidNumber()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (float.TryParse(input, out float number))
+                {
+                    return number;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number:");
+                }
+            }
         }
     }
 }
